@@ -1,7 +1,5 @@
-import logging, sys, os, re, hashlib
-import utilClass
+import logging, sys, os, json, hashlib
 
-utils = utilClass.Utils()
 root = str(os.path.dirname(os.path.realpath(__file__)))
 
 def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes):
@@ -31,6 +29,16 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes):
 
     return result;
 
+def readJsonFile(self, fileName):
+    try:
+        with open( fileName, 'r') as jsonFile:
+            jsonData = json.load(jsonFile)
+        jsonFile.close()
+        return jsonData
+    except OSError:
+        logging.error("File read error :: " + fileName)
+        return None
+
 if __name__ == "__main__":
     # Program argument setting
     #   argument :: dev environment, crawling - date
@@ -44,7 +52,7 @@ if __name__ == "__main__":
 
     # 환경 설정 파일 로딩
     logging.info("main() - Load config file")
-    config = utils.readJsonFile(root + '/../config/config.json')
+    config = readJsonFile(root + '/../config/config.json')
 
     # 파라미터 로딩
     logging.info("main() - Load arguments")
