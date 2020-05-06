@@ -1,33 +1,24 @@
 #!/bin/bash
 
 if [ $# -ne 3 ]; then
-   echo "Usage: $0 [LOCAL|DEV|TEST] [DATE like YYYY-MM-DD]"
+	echo "Usage: $0 (encrypt source) (salt) (encrypt target)"
    exit -1
 fi
 
-ServerName=$1
-Date=$2
+#ubuntu server path
+encryptHome='/home/jarvis/work/pyEncryptUsingSHA256' 
+encryptCode='pyEncryptUsingSHA256.py'
 
-#DEV server path
-#CrawlingHome='/home/jarvis/work/pyCrawler' 
-
-#Local server path
-CrawlingHome='/Users/jarvis/work/pyTrendyWord_DataGenerator'
-CrawlingCode='pyCrawler.py'
+#MAC local path
+#encryptHome='/Users/bogyum/work/pyEncryptUsingSHA256' 
+#encryptCode='/pyEncryptUsingSHA256.py'
 
 #Date=$(date '+%Y-%m-%d' -d '1 day ago')
-if [ ! -d "${CrawlingHome}/log" ]; then
-	mkdir ${CrawlingHome}/log
+if [ ! -d "${encryptHome}/log" ]; then
+	mkdir ${encryptHome}/log
 fi
 
-Log="${CrawlingHome}/log/$Date.pyCrawler.log"
+Log="${encryptHome}/log/$Date.log"
 
-if [ ! -d "${CrawlingHome}/result/crawl/${Date}" ]; then
-	mkdir ${CrawlingHome}/result/crawl/${Date}
-fi
-
-echo "ServerName=${ServerName}"
-echo "Date=${Date}"
-
-python3 ${CrawlingHome}/src/${CrawlingCode} ${ServerName} ${Date}
+python3 ${encryptHome}/src/${encryptCode} $1 $2 $3
 
