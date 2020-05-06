@@ -1,0 +1,10 @@
+{
+  "encrype_source": {
+      "file_path": "/resource/data",
+      "salt_path": "/resource/salt",
+      "key_columes": [ 0, 1, 2 ]
+  },
+  "encrype_target": {
+      "file_path": "/results"
+  }
+}
