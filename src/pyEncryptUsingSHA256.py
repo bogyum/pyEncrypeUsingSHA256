@@ -1,3 +1,4 @@
+#-*-coding: utf-8
 import logging, sys, os, json, hashlib
 
 root = str(os.path.dirname(os.path.realpath(__file__)))
@@ -13,7 +14,7 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes):
         saltFile.close()
 
         logging.info("getEncrypeUsingSHA256() - Do encryption")
-        with open(sourceFileName, 'r') as sourceFile:
+        with open(sourceFileName, 'r', encoding='UTF8') as sourceFile:
             while True:
                 line = sourceFile.readline()
                 if not line: break
@@ -29,7 +30,7 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes):
 
     return result;
 
-def readJsonFile(self, fileName):
+def readJsonFile(fileName):
     try:
         with open( fileName, 'r') as jsonFile:
             jsonData = json.load(jsonFile)

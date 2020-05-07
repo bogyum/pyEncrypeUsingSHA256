@@ -5,13 +5,16 @@ if [ $# -ne 3 ]; then
    exit -1
 fi
 
-#ubuntu server path
-encryptHome='/home/jarvis/work/pyEncryptUsingSHA256' 
 encryptCode='pyEncryptUsingSHA256.py'
+
+#ubuntu server path
+#encryptHome='/home/jarvis/work/pyEncryptUsingSHA256' 
 
 #MAC local path
 #encryptHome='/Users/bogyum/work/pyEncryptUsingSHA256' 
-#encryptCode='/pyEncryptUsingSHA256.py'
+
+#Windows local path
+encryptHome='/c/work/pyEncryptUsingSHA256'
 
 #Date=$(date '+%Y-%m-%d' -d '1 day ago')
 if [ ! -d "${encryptHome}/log" ]; then
@@ -20,5 +23,5 @@ fi
 
 Log="${encryptHome}/log/$Date.log"
 
-python3 ${encryptHome}/src/${encryptCode} $1 $2 $3
+python ${encryptHome}/src/${encryptCode} $1 $2 $3
 
