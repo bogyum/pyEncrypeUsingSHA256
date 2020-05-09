@@ -13,15 +13,26 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes):
             salt = saltFile.read().replace('\n', '')
         saltFile.close()
 
-        logging.info("getEncrypeUsingSHA256() - Do encryption")
+        logging.info("getEncrypeUsingSHA256() - Do encryption(UTF-8)")
         with open(sourceFileName, 'r', encoding='UTF8') as sourceFile:
             while True:
-                line = sourceFile.readline()
+                line = sourceFile.readline().rstrip('\n')
                 if not line: break
                 data = line.split("\t")
 
-                keyString = data[keyColumes[0]] + data[keyColumes[1]] + data[keyColumes[2]]
-                result.append(hashlib.sha256( salt.encode() + keyString.encode()).hexdigest())
+                keyString = ''
+                for i in keyColumes:
+                    if '-' in data[i]:
+                        keyString += str(data[i])[:6] + str(data[i])[7]
+                    else:
+                        keyString += data[i]
+                result.append(hashlib.sha256(salt.encode() + keyString.encode()).hexdigest())
+
+                '''
+                   # TODO 
+                     향후 데이터 제공시 활용하기 위해서는 원본 파일과 함께 키 값을 출력할 필요가 있음(using File not DB)
+                '''
+
         sourceFile.close()
 
     except OSError:
