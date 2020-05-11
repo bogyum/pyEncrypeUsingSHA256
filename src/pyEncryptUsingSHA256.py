@@ -9,7 +9,7 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes, ASK_ID, RSHP
     result = []
     try:
         logging.info("getEncrypeUsingSHA256() - Load salt")
-        with open(saltFileName, 'r') as saltFile:
+        with open(saltFileName, 'r', encoding='UTF8') as saltFile:
             while True:
                 saltLine = saltFile.readline().rstrip('\n')
 
@@ -66,7 +66,7 @@ def getEncrypeUsingSHA256(sourceFileName, saltFileName, keyColumes, ASK_ID, RSHP
 
 def readJsonFile(fileName):
     try:
-        with open( fileName, 'r') as jsonFile:
+        with open( fileName, 'r', encoding='UTF8') as jsonFile:
             jsonData = json.load(jsonFile)
         jsonFile.close()
         return jsonData
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     # targetFileName = root + '/..' + config['encrype_target']['file_path'] + '/IF_DL_304_' + sys.argv[3] + "_"
     try:
-        with open(targetFileName, 'w') as outputFile:
+        with open(targetFileName, 'w', encoding='UTF8') as outputFile:
             for keys in encrypeResult:
                 outputFile.write(keys)
                 outputFile.write("\n")
