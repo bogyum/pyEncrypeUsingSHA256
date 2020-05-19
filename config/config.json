@@ -1,10 +1,15 @@
 {
-  "encrype_source": {
-      "file_path": "/resource/data",
-      "salt_path": "/resource/salt",
-      "key_columes": [ 0, 1 ]
+  "encrypt": {
+      "source_path": "/resource/encrypt/org_data",
+      "salt_path": "/resource/encrypt/salt",
+      "target_encrypt_path": "/resource/encrypt/encrypted_data",
+      "target_key_path": "/results/encrypted_keys",
+      "key_columns": [0, 1]
   },
-  "encrype_target": {
-      "file_path": "/results"
+  "join": {
+      "data_path": "/resource/encrypt/encrypted_data",
+      "key_list_path": "/resource/join/keys",
+      "header_path" : "/resource/join/header_data",
+      "target_path": "/results/final_data"
   }
 }
